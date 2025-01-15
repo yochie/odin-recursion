@@ -11,25 +11,15 @@ function mergeSort(arr) {
 
 function merge(left, right) {
   const sorted = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
-  const fullLength = left.length + right.length;
-  while (sorted.length < fullLength) {
-    if (left[leftIndex] < right[rightIndex]) {
-      sorted.push(left[leftIndex++]);
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] < right[0]) {
+      sorted.push(left.shift());
     } else {
-      sorted.push(right[rightIndex++]);
-    }
-
-    if (leftIndex === left.length) {
-      sorted.push(...right.slice(rightIndex));
-    }
-    if (rightIndex === right.length) {
-      sorted.push(...left.slice(leftIndex));
+      sorted.push(right.shift());
     }
   }
 
-  return sorted;
+  return sorted.concat(left, right);
 }
 
 console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
